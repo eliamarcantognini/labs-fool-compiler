@@ -58,13 +58,12 @@ public class ExecuteVM {
                     push(v2 / v1);
                     break;
                 case SVMParser.STOREW:
-                    v1 = pop();
-                    v2 = pop();
-                    //TODO.
+                    address = pop();
+                    memory[address] = pop();
                     break;
                 case SVMParser.LOADW:
-                    v1 = memory[sp];
-                    //TODO.
+                    address = pop();
+                    push(memory[address]);
                     break;
                 case SVMParser.BRANCH:
                     address = code[ip]; // prendo il code di IP e lo setto ad address
@@ -85,6 +84,9 @@ public class ExecuteVM {
                         ip = address;
                     break;
                 case SVMParser.JS:
+                    address = pop();
+                    ra = ip;
+                    sp = address;
                     break;
                 case SVMParser.LOADRA:
                     push(ra);
@@ -118,16 +120,8 @@ public class ExecuteVM {
                     break;
                 case SVMParser.HALT:
                     return;
-//                case SVMParser.COL:
-//                    break;
                 case SVMParser.LABEL:
                     break;
-//                case SVMParser.INTEGER:
-//                    break;
-//                case SVMParser.WHITESP:
-//                    break;
-//                case SVMParser.ERR:
-//                    break;
                 default:
                     throw new IllegalStateException("Unexpected value: " + bytecode);
             }
