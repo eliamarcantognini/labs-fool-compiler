@@ -1,55 +1,47 @@
 package compiler;
 
-import compiler.AST.*;
+import compiler.AST.IntNode;
+import compiler.AST.PlusNode;
+import compiler.AST.ProgNode;
+import compiler.AST.TimesNode;
+import compiler.lib.BaseASTVisitor;
+import compiler.lib.Node;
 
-public class PrintASTVisitor {
+public class PrintASTVisitor extends BaseASTVisitor<Void> {
 
-	public void visitNode(ProgNode n) {
-		System.out.println("Prog");
-	}
+    PrintASTVisitor() {
+        super(true);
+    }
 
-	public void visitNode(PlusNode n) {
-		System.out.println("Plus");
-	}
+    String indent;
 
-	public void visitNode(TimesNode n) {
-		System.out.println("Times");
-	}
+    public Void visitNode(ProgNode n) {
+        printNode(n);
+        visit(n.exp);
+        return null;
+    }
 
-	public void visitNode(IntNode n) {
-		System.out.println("Int");  // must also print value!
-	}
+    public Void visitNode(PlusNode n) {
+        printNode(n);
+        visit(n.left);
+        visit(n.right);
+        return null;
+    }
+
+    public Void visitNode(TimesNode n) {
+        printNode(n);
+        visit(n.left);
+        visit(n.right);
+        return null;
+    }
+
+    public Void visitNode(IntNode n) {
+        printNode(n, n.val.toString());
+        return null;
+    }
 }
 
 
 
-
-
-
-//	public void visit(Node n) { n.accept(this); } //performs the "n"-specific visit
-
-//	String indent;
-//
-//	@Override
-//	public void visit(Node n) {
-//		String temp=indent;
-//		indent=(indent==null)?"":indent+"  ";
-//		n.accept(this);
-//		indent=temp;
-//	}
-
-//	void printNode(Node n) {
-//		System.out.println(indent+extractNodeName(n.getClass().getName()));
-//	}
-//
-//	void printNode(Node n, String s) {
-//		System.out.println(indent+extractNodeName(n.getClass().getName())+": "+s);
-//	}
-//
-//	String extractNodeName(String s) { // s is in the form compiler.AST$NameNode
-//		return s.substring(s.lastIndexOf('$')+1,s.length()-4);
-//	}
-
-//	PrintASTVisitor() { super(true); }
 
 

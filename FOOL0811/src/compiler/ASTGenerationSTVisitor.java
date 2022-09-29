@@ -1,5 +1,6 @@
 package compiler;
 
+import compiler.lib.Node;
 import org.antlr.v4.runtime.tree.*;
 import compiler.FOOLParser.*;
 import compiler.AST.*;
