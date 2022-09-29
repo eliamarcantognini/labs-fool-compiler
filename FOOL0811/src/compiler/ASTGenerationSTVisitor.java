@@ -2,7 +2,7 @@ package compiler;
 
 import org.antlr.v4.runtime.tree.*;
 import compiler.FOOLParser.*;
-//import compiler.AST.*;
+import compiler.AST.*;
 
 
 public class ASTGenerationSTVisitor extends FOOLBaseVisitor<Node> {
@@ -21,33 +21,29 @@ public class ASTGenerationSTVisitor extends FOOLBaseVisitor<Node> {
 	@Override
 	public Node visitProg(ProgContext c) {
 		System.out.println(indent+"prog");
-//		return visit( c.exp() );
 
-		return null;
+		return new ProgNode(visit(c.exp()));
 	}
 	
 	@Override
 	public Node visitTimes(TimesContext c) {       //modified production tags
 		System.out.println(indent+"exp: prod with TIMES");
-//		return visit( c.exp(0) ) * visit( c.exp(1) );
 
-		return null;
+		return new TimesNode(visit(c.exp(0)), visit(c.exp(1)));
 	}
 
 	@Override
 	public Node visitPlus(PlusContext c) {
 		System.out.println(indent+"exp: prod with PLUS");
-//		return visit( c.exp(0) ) + visit( c.exp(1) );
 
-		return null;
+		return new PlusNode(visit(c.exp(0)), visit(c.exp(1)));
 	}
 
 	@Override
 	public Node visitPars(ParsContext c) {
 		System.out.println(indent+"exp: prod with LPAR RPAR");
-//		return visit(c.exp());
 
-		return null;
+		return visit(c.exp());
 	}
 
 	@Override
@@ -56,9 +52,8 @@ public class ASTGenerationSTVisitor extends FOOLBaseVisitor<Node> {
 		boolean minus= c.MINUS( ) != null;
 		int res= minus?-v:v;
 		System.out.println(indent+"exp: prod with "+(minus?"MINUS ":"")+"NUM "+res);
-//		return res;
 
-		return null;
+		return new IntNode(res);
 	}
 	
 }
