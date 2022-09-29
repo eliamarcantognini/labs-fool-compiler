@@ -1,9 +1,6 @@
 package compiler;
 
-import compiler.AST.IntNode;
-import compiler.AST.PlusNode;
-import compiler.AST.ProgNode;
-import compiler.AST.TimesNode;
+import compiler.AST.*;
 import compiler.lib.BaseASTVisitor;
 
 public class CalcASTVisitor extends BaseASTVisitor<Integer> {

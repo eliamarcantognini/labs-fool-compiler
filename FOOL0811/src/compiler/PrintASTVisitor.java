@@ -1,11 +1,8 @@
 package compiler;
 
-import compiler.AST.IntNode;
-import compiler.AST.PlusNode;
-import compiler.AST.ProgNode;
-import compiler.AST.TimesNode;
+import compiler.AST.*;
 import compiler.lib.BaseASTVisitor;
-import compiler.lib.Node;
+import compiler.lib.UnimplException;
 
 public class PrintASTVisitor extends BaseASTVisitor<Void> {
 
@@ -37,6 +34,28 @@ public class PrintASTVisitor extends BaseASTVisitor<Void> {
 
     public Void visitNode(IntNode n) {
         printNode(n, n.val.toString());
+        return null;
+    }
+
+    public Void visitNode(EqualNode n) {
+        printNode(n);
+        visit(n.left);
+        visit(n.right);
+        return null;
+    }
+
+    public Void visitNode(BoolNode n) {
+        printNode(n, n.val.toString());
+        return null;
+    }
+
+    public Void visitNode(IfNode n) {
+        printNode(n);
+        return null;
+    }
+
+    public Void visitNode(PrintNode n) {
+        printNode(n);
         return null;
     }
 }

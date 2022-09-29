@@ -1,9 +1,6 @@
 package compiler.lib;
 
-import compiler.AST.IntNode;
-import compiler.AST.PlusNode;
-import compiler.AST.ProgNode;
-import compiler.AST.TimesNode;
+import compiler.AST.*;
 
 public class BaseASTVisitor<S> {
 
@@ -57,6 +54,22 @@ public class BaseASTVisitor<S> {
     }
 
     public S visitNode(IntNode n) {
+        throw new UnimplException();
+    }
+
+    public S visitNode(EqualNode n) {
+        throw new UnimplException();
+    }
+
+    public S visitNode(BoolNode n) {
+        throw new UnimplException();
+    }
+
+    public S visitNode(IfNode n) {
+        throw new UnimplException();
+    }
+
+    public S visitNode(PrintNode n) {
         throw new UnimplException();
     }
 }

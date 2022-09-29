@@ -5,36 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cc7ab198-4a06-452b-b31b-d27b23036fea" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gradle/7.4/checksums/checksums.lock" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/7.4/dependencies-accessors/dependencies-accessors.lock" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/7.4/dependencies-accessors/gc.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/7.4/executionHistory/executionHistory.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/7.4/executionHistory/executionHistory.lock" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/7.4/fileChanges/last-build.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/7.4/fileHashes/fileHashes.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/7.4/fileHashes/fileHashes.lock" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/7.4/gc.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/cache.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/vcs-1/gc.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradlew" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradlew.bat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/settings.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/FOOL0811/compiler/AST.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FOOL0811/compiler/AST.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/FOOL0811/compiler/PrintASTVisitor.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FOOL0811/compiler/PrintASTVisitor.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/FOOL0811/compiler/lib/BaseASTVisitor.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FOOL0811/compiler/lib/BaseASTVisitor.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/compiler/AST.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/compiler/AST.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/compiler/ASTGenerationSTVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/compiler/ASTGenerationSTVisitor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/compiler/Node.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/compiler/lib/Node.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/compiler/CalcASTVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/compiler/CalcASTVisitor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/compiler/PrintASTVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/compiler/PrintASTVisitor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/compiler/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/compiler/CompilerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/compiler/lib/BaseASTVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/compiler/lib/BaseASTVisitor.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -103,7 +81,7 @@
       <option name="presentableId" value="Default" />
       <updated>1664448137127</updated>
       <workItem from="1664448138619" duration="293000" />
-      <workItem from="1664448456495" duration="2166000" />
+      <workItem from="1664448456495" duration="4072000" />
     </task>
     <servers />
   </component>
