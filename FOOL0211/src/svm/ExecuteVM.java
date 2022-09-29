@@ -58,8 +58,8 @@ public class ExecuteVM {
                     push(v2 / v1);
                     break;
                 case SVMParser.STOREW:
-                    address = pop();
-                    memory[address] = pop();
+                    address = pop(); // assumo che in cima allo stack ci sia l'indirizzo
+                    memory[address] = pop(); // accedo all'indirizzo e ci metto il valore
                     break;
                 case SVMParser.LOADW:
                     address = pop();

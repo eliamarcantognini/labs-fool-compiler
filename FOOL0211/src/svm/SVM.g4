@@ -60,6 +60,8 @@ instruction:
 	        } //pop two values and jump if the second one is less or equal to the first one
 	  | JS                ///pop one value from the stack:
 	  		      //  copy the instruction pointer in the RA register and jump to the popped value
+	  		      // Jump to Subroutine. Fa un salto fuori verso una funzione, poi finita la funzione da
+	  		      // eseguire devo tornare indietro al flusso di controllo precedente
 	  | LOADRA {code[i++] = LOADRA;} //push in the stack the content of the RA register
 	  | STORERA {code[i++] = STORERA;} //pop the top of the stack and copy it in the RA register
 	  | LOADTM {code[i++] = LOADTM;} //push in the stack the content of the TM register
