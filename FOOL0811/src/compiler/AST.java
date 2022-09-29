@@ -109,10 +109,10 @@ public class AST {
 
     public static class PrintNode implements Node {
 
-        Node print;
+        Node exp;
 
-        public PrintNode(Node print) {
-            this.print = print;
+        public PrintNode(Node exp) {
+            this.exp = exp;
         }
 
         @Override

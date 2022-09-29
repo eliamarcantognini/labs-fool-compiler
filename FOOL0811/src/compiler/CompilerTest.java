@@ -7,7 +7,7 @@ import org.antlr.v4.runtime.tree.*;
 public class CompilerTest {
     public static void main(String[] args) throws Exception {
 
-        String fileName = "prova.fool";
+        String fileName = "esempio.fool";
 
         CharStream chars = CharStreams.fromFileName(fileName);
         FOOLLexer lexer = new FOOLLexer(chars);
@@ -26,8 +26,8 @@ public class CompilerTest {
         ASTGenerationSTVisitor astGenVisitor = new ASTGenerationSTVisitor();
         Node ast = astGenVisitor.visit(st);
 
-        System.out.println("Visualizing AST...");
-        new PrintASTVisitor().visit(ast);
+//        System.out.println("Visualizing AST...");
+//        new PrintASTVisitor().visit(ast);
 
         System.out.println("Calculating program value...");
         System.out.println("Program value is: "+new CalcASTVisitor(true).visit(ast));
