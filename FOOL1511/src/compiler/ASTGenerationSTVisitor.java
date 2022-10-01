@@ -6,6 +6,9 @@ import org.antlr.v4.runtime.tree.ParseTree;
 import compiler.AST.*;
 import compiler.FOOLParser.*;
 import compiler.lib.*;
+
+import java.util.ArrayList;
+
 import static compiler.lib.FOOLlib.*;
 
 public class ASTGenerationSTVisitor extends FOOLBaseVisitor<Node> {
@@ -42,9 +45,9 @@ public class ASTGenerationSTVisitor extends FOOLBaseVisitor<Node> {
 	@Override
 	public Node visitLetInProg(LetInProgContext c) { 
 		if (print) printVarAndProdName(c);
-		for (DecContext dec : c.dec()) visit(dec);
-		visit(c.exp());
-		return null;
+		var decList = new ArrayList<Node>();
+		for (DecContext dec : c.dec()) decList.add(visit(dec));
+		return new ProgLetInNode(decList, visit(c.exp()));
 	}
 
 	@Override
@@ -74,36 +77,37 @@ public class ASTGenerationSTVisitor extends FOOLBaseVisitor<Node> {
 	@Override
 	public Node visitVardec(VardecContext c) {
 		if (print) printVarAndProdName(c);
+		Node n = null;
 		if (c.ID()!=null) { //non-incomplete ST
-			c.ID().getText(); //production has a single token with name ID
+			n = new VarNode(c.ID().getText(), visit(c.type()), visit(c.exp()));
+			n.setLine(c.ID().getSymbol().getLine());
 		}
-		visit(c.type());
-		visit(c.exp());
-        return null;
+		return n;
 	}
 
 	@Override
 	public Node visitFundec(FundecContext c) {
 		if (print) printVarAndProdName(c);
-		for (DecContext dec : c.dec()) visit(dec);
+		Node n = null;
+		var decList = new ArrayList<Node>();
+		for (DecContext dec : c.dec()) decList.add(visit(dec));
 		if (c.ID().size()>0) { //non-incomplete ST
-			c.ID(0).getText(); //production has multiple tokens with name ID
+			n = new FunNode(c.ID(0).getText(), visit(c.type(0)), decList,visit(c.exp()));
+			n.setLine(c.ID(0).getSymbol().getLine());
 		}
-		visit(c.type(0));
-		visit(c.exp());
-		return null;
+		return n;
 	}
 
 	@Override
 	public Node visitIntType(IntTypeContext c) {
 		if (print) printVarAndProdName(c);
-		return null;
+		return new IntTypeNode();
 	}
 
 	@Override
 	public Node visitBoolType(BoolTypeContext c) {
 		if (print) printVarAndProdName(c);
-		return null;
+		return new BoolTypeNode();
 	}
 
 	@Override
@@ -149,14 +153,16 @@ public class ASTGenerationSTVisitor extends FOOLBaseVisitor<Node> {
 	@Override
 	public Node visitId(IdContext c) {
 		if (print) printVarAndProdName(c);
-		return null;
+		Node n = new IdNode(c.ID().getText());
+		n.setLine(c.ID().getSymbol().getLine());
+		return n;
 	}
 
 	@Override
 	public Node visitCall(CallContext c) {
 		if (print) printVarAndProdName(c);
-		return null;
+		Node n = new CallNode(c.ID().getText());
+		n.setLine(c.ID().getSymbol().getLine());
+		return n;
 	}
 }
-
-//n.setLine(c.ID().getSymbol().getLine());

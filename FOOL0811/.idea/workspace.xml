@@ -6,16 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="cc7ab198-4a06-452b-b31b-d27b23036fea" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FOOL0811/compiler/AST$PrintNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FOOL0811/compiler/AST$PrintNode.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FOOL0811/compiler/ASTGenerationSTVisitor.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FOOL0811/compiler/ASTGenerationSTVisitor.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FOOL0811/compiler/CalcASTVisitor.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FOOL0811/compiler/CalcASTVisitor.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FOOL0811/compiler/CompilerTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FOOL0811/compiler/CompilerTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FOOL0811/compiler/PrintASTVisitor.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FOOL0811/compiler/PrintASTVisitor.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/compiler/AST.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/compiler/AST.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/compiler/ASTGenerationSTVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/compiler/ASTGenerationSTVisitor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/compiler/CalcASTVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/compiler/CalcASTVisitor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/compiler/CompilerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/compiler/CompilerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/compiler/PrintASTVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/compiler/PrintASTVisitor.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,17 +30,17 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "preferences.lookFeel"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="G:\OneDrive - Alma Mater Studiorum Università di Bologna\LCMC\Lab\Workspace\labs-fool-compiler\FOOL0811\src\compiler\lib" />
@@ -86,6 +76,7 @@
       <updated>1664448137127</updated>
       <workItem from="1664448138619" duration="293000" />
       <workItem from="1664448456495" duration="6671000" />
+      <workItem from="1664464415017" duration="1167000" />
     </task>
     <servers />
   </component>
