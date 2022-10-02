@@ -127,6 +127,7 @@ public class SymbolTableASTVisitor extends BaseASTVisitor<Void> {
         }
         // entro in un nuovo scope
         nestingLevel++;
+        var hm = new HashMap<String, STentry>();
         symTable.add(new HashMap<String, STentry>());
         for (ParNode par : n.parlist) {
             if (symTable.get(nestingLevel).put(par.id, new STentry(nestingLevel)) != null) {
