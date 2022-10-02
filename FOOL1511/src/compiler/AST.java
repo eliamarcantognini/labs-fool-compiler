@@ -174,13 +174,14 @@ public class AST {
     public static class FunNode extends Node {
         String id;
         Node retType;
-        //List<ParNode> parlist;
+        List<ParNode> parlist;
         List<Node> declist;
         Node exp;
 
-        FunNode(String i, Node rt, /* List<ParNode> pl, */ List<Node> dl, Node e) {
+        FunNode(String i, Node rt, List<ParNode> pl, List<Node> dl, Node e) {
             id = i;
-            retType = rt; /* parlist=pl; */
+            retType = rt;
+            parlist = pl;
             declist = dl;
             exp = e;
         }
@@ -208,10 +209,26 @@ public class AST {
     public static class CallNode extends Node {
         String id;
         STentry entry;
+        List<Node> arglist;
 
-        // List<Node> arglist;
-        CallNode(String i /*, List<Node> p */) {
-            id = i; /* arglist = p; */
+        CallNode(String i, List<Node> p) {
+            id = i;
+            arglist = p;
+        }
+
+        @Override
+        public <S> S accept(BaseASTVisitor<S> visitor) {
+            return visitor.visitNode(this);
+        }
+    }
+
+    public static class ParNode extends Node {
+        String id;
+        Node type;
+
+        ParNode(String i, Node t) {
+            id = i;
+            type = t;
         }
 
         @Override
