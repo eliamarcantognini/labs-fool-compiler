@@ -6,7 +6,8 @@ let
         let 
           var x:int = -1;
         in g();   
-    in if y==3 then { f() } else { false };
+    in
+        if y==3 then { f() } else { false };
 in  
   print ( 
     if g() 

@@ -1,139 +1,222 @@
 package compiler;
 
-import java.util.*;
-import compiler.lib.*;
+import compiler.lib.BaseASTVisitor;
+import compiler.lib.Node;
+
+import java.util.List;
 
 public class AST {
 
-	public static class ProgNode extends Node {
-		Node exp;
-		ProgNode(Node e) {exp = e;}
+    public static class ProgNode extends Node {
+        Node exp;
 
-		@Override
-		public <S> S accept(BaseASTVisitor<S> visitor) { return visitor.visitNode(this); }
-	}
-	
-	public static class IntNode extends Node {
-		Integer val;
-		IntNode(Integer n) {val = n;}
+        ProgNode(Node e) {
+            exp = e;
+        }
 
-		@Override
-		public <S> S accept(BaseASTVisitor<S> visitor) { return visitor.visitNode(this); }
-	}
-	
-	public static class PlusNode extends Node {
-		Node left;
-		Node right;
-		PlusNode(Node l, Node r) {left = l; right = r;}
+        @Override
+        public <S> S accept(BaseASTVisitor<S> visitor) {
+            return visitor.visitNode(this);
+        }
+    }
 
-		@Override
-		public <S> S accept(BaseASTVisitor<S> visitor) { return visitor.visitNode(this); }
-	}
-	
-	public static class TimesNode extends Node {
-		Node left;
-		Node right;
-		TimesNode(Node l, Node r) {left = l; right = r;}
+    public static class IntNode extends Node {
+        Integer val;
 
-		@Override
-		public <S> S accept(BaseASTVisitor<S> visitor) { return visitor.visitNode(this); }
-	}
-	
-	public static class EqualNode extends Node {
-		Node left;
-		Node right;
-		EqualNode(Node l, Node r) {left = l; right = r;}
+        IntNode(Integer n) {
+            val = n;
+        }
 
-		@Override
-		public <S> S accept(BaseASTVisitor<S> visitor) { return visitor.visitNode(this); }
-	}
-	
-	public static class BoolNode extends Node {
-		Boolean val;
-		BoolNode(boolean n) {val = n;}
+        @Override
+        public <S> S accept(BaseASTVisitor<S> visitor) {
+            return visitor.visitNode(this);
+        }
+    }
 
-		@Override
-		public <S> S accept(BaseASTVisitor<S> visitor) { return visitor.visitNode(this); }
-	}
-	
-	public static class IfNode extends Node {
-		Node cond;
-		Node th;
-		Node el;
-		IfNode(Node c, Node t, Node e) {cond = c; th = t; el = e;}
+    public static class PlusNode extends Node {
+        Node left;
+        Node right;
 
-		@Override
-		public <S> S accept(BaseASTVisitor<S> visitor) { return visitor.visitNode(this); }
-	}
-	
-	public static class PrintNode extends Node {
-		Node exp;
-		PrintNode(Node e) {exp = e;}
+        PlusNode(Node l, Node r) {
+            left = l;
+            right = r;
+        }
 
-		@Override
-		public <S> S accept(BaseASTVisitor<S> visitor) { return visitor.visitNode(this); }
-	}
+        @Override
+        public <S> S accept(BaseASTVisitor<S> visitor) {
+            return visitor.visitNode(this);
+        }
+    }
 
-	////
-	
-	public static class ProgLetInNode extends Node {
-		List<Node> declist;
-		Node exp;
-		ProgLetInNode(List<Node> d, Node e) {declist = d; exp = e;}
+    public static class TimesNode extends Node {
+        Node left;
+        Node right;
 
-		@Override
-		public <S> S accept(BaseASTVisitor<S> visitor) { return visitor.visitNode(this); }
-	}
+        TimesNode(Node l, Node r) {
+            left = l;
+            right = r;
+        }
 
-	public static class BoolTypeNode extends Node {
+        @Override
+        public <S> S accept(BaseASTVisitor<S> visitor) {
+            return visitor.visitNode(this);
+        }
+    }
 
-		@Override
-		public <S> S accept(BaseASTVisitor<S> visitor) { return visitor.visitNode(this); }
-	}
+    public static class EqualNode extends Node {
+        Node left;
+        Node right;
 
-	public static class IntTypeNode extends Node {
+        EqualNode(Node l, Node r) {
+            left = l;
+            right = r;
+        }
 
-		@Override
-		public <S> S accept(BaseASTVisitor<S> visitor) { return visitor.visitNode(this); }
-	}
+        @Override
+        public <S> S accept(BaseASTVisitor<S> visitor) {
+            return visitor.visitNode(this);
+        }
+    }
 
-	public static class VarNode extends Node {
-		String id;
-		Node type;
-		Node exp;
-		VarNode(String i, Node t, Node v) {id = i; type = t; exp = v;}
+    public static class BoolNode extends Node {
+        Boolean val;
 
-		@Override
-		public <S> S accept(BaseASTVisitor<S> visitor) { return visitor.visitNode(this); }
-	}
+        BoolNode(boolean n) {
+            val = n;
+        }
 
-	public static class FunNode extends Node {
-		String id;
-		Node retType;
-		//List<ParNode> parlist;
-		List<Node> declist; 
-		Node exp;
-		FunNode(String i, Node rt, /* List<ParNode> pl, */ List<Node> dl, Node e) {
-	    	id=i; retType=rt; /* parlist=pl; */ declist=dl; exp=e;}
-		
-		@Override
-		public <S> S accept(BaseASTVisitor<S> visitor) { return visitor.visitNode(this); }
-	}
+        @Override
+        public <S> S accept(BaseASTVisitor<S> visitor) {
+            return visitor.visitNode(this);
+        }
+    }
 
-	public static class IdNode extends Node {
-		String id;
-		IdNode(String i) {id = i;}
+    public static class IfNode extends Node {
+        Node cond;
+        Node th;
+        Node el;
 
-		@Override
-		public <S> S accept(BaseASTVisitor<S> visitor) { return visitor.visitNode(this); }
-	}
+        IfNode(Node c, Node t, Node e) {
+            cond = c;
+            th = t;
+            el = e;
+        }
 
-	public static class CallNode extends Node {
-		String id;
-		// List<Node> arglist;
-		CallNode(String i /*, List<Node> p */) {id = i; /* arglist = p; */}
+        @Override
+        public <S> S accept(BaseASTVisitor<S> visitor) {
+            return visitor.visitNode(this);
+        }
+    }
 
-		@Override
-		public <S> S accept(BaseASTVisitor<S> visitor) { return visitor.visitNode(this); }
-	}
+    public static class PrintNode extends Node {
+        Node exp;
+
+        PrintNode(Node e) {
+            exp = e;
+        }
+
+        @Override
+        public <S> S accept(BaseASTVisitor<S> visitor) {
+            return visitor.visitNode(this);
+        }
+    }
+
+    ////
+
+    public static class ProgLetInNode extends Node {
+        List<Node> declist;
+        Node exp;
+
+        ProgLetInNode(List<Node> d, Node e) {
+            declist = d;
+            exp = e;
+        }
+
+        @Override
+        public <S> S accept(BaseASTVisitor<S> visitor) {
+            return visitor.visitNode(this);
+        }
+    }
+
+    public static class BoolTypeNode extends Node {
+
+        @Override
+        public <S> S accept(BaseASTVisitor<S> visitor) {
+            return visitor.visitNode(this);
+        }
+    }
+
+    public static class IntTypeNode extends Node {
+
+        @Override
+        public <S> S accept(BaseASTVisitor<S> visitor) {
+            return visitor.visitNode(this);
+        }
+    }
+
+    public static class VarNode extends Node {
+        String id;
+        Node type;
+        Node exp;
+
+        VarNode(String i, Node t, Node v) {
+            id = i;
+            type = t;
+            exp = v;
+        }
+
+        @Override
+        public <S> S accept(BaseASTVisitor<S> visitor) {
+            return visitor.visitNode(this);
+        }
+    }
+
+    public static class FunNode extends Node {
+        String id;
+        Node retType;
+        //List<ParNode> parlist;
+        List<Node> declist;
+        Node exp;
+
+        FunNode(String i, Node rt, /* List<ParNode> pl, */ List<Node> dl, Node e) {
+            id = i;
+            retType = rt; /* parlist=pl; */
+            declist = dl;
+            exp = e;
+        }
+
+        @Override
+        public <S> S accept(BaseASTVisitor<S> visitor) {
+            return visitor.visitNode(this);
+        }
+    }
+
+    public static class IdNode extends Node {
+        String id;
+        STentry entry;
+
+        IdNode(String i) {
+            id = i;
+        }
+
+        @Override
+        public <S> S accept(BaseASTVisitor<S> visitor) {
+            return visitor.visitNode(this);
+        }
+    }
+
+    public static class CallNode extends Node {
+        String id;
+        STentry entry;
+
+        // List<Node> arglist;
+        CallNode(String i /*, List<Node> p */) {
+            id = i; /* arglist = p; */
+        }
+
+        @Override
+        public <S> S accept(BaseASTVisitor<S> visitor) {
+            return visitor.visitNode(this);
+        }
+    }
 }
