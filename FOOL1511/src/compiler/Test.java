@@ -33,8 +33,8 @@ public class Test {
         SymbolTableASTVisitor symtableVisitor = new SymbolTableASTVisitor(true); // use true to visualize the AST
         symtableVisitor.visit(ast);
         System.out.println("You had: "+symtableVisitor.stErrors+" symbol table errors.\n");
-//
-//        System.out.println("Visualizing Enriched AST.");
-//        new PrintEASTVisitor().visit(ast);
+
+        System.out.println("Visualizing Enriched AST.");
+        new PrintEASTVisitor().visit(ast);
     }
 }

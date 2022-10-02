@@ -1,28 +1,18 @@
 package compiler;
 
-//import compiler.lib.*;
+import compiler.lib.BaseASTVisitor;
+import compiler.lib.BaseEASTVisitor;
+import compiler.lib.Visitable;
 
-/**
- * Symbol Table Entr
- */
-public class STentry {
-	int nl;
-	public STentry(int n) {nl = n;}
+public class STentry implements Visitable {
+    int nl;
+
+    public STentry(int n) {
+        nl = n;
+    }
+
+    @Override
+    public <S> S accept(BaseASTVisitor<S> visitor) {
+        return ((BaseEASTVisitor<S>) visitor).visitSTentry(this);
+    }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-//@Override
-//public <S> S accept(BaseASTVisitor<S> visitor) {
-//	return ((BaseEASTVisitor<S>) visitor).visitSTentry(this);
-//}
