@@ -121,37 +121,42 @@ public class SymbolTableASTVisitor extends BaseASTVisitor<Void> {
     @Override
     public Void visitNode(FunNode n) {
         if (print) printNode(n, n.id);
-		if (symTable.get(nestingLevel).put(n.id, new STentry(nestingLevel)) != null) {
-			System.out.println("Fun id " + n.id + " at line " + n.getLine() + " already declared");
-			stErrors++;
-		}
-		// entro in un nuovo scope
-		nestingLevel++;
-		symTable.add(new HashMap<String, STentry>());
-//		for (ParNode par : n.parlist) visit(par);
-		for (Node dec : n.declist) visit(dec);
+        if (symTable.get(nestingLevel).put(n.id, new STentry(nestingLevel)) != null) {
+            System.out.println("Fun id " + n.id + " at line " + n.getLine() + " already declared");
+            stErrors++;
+        }
+        // entro in un nuovo scope
+        nestingLevel++;
+        symTable.add(new HashMap<String, STentry>());
+        for (ParNode par : n.parlist) {
+            if (symTable.get(nestingLevel).put(par.id, new STentry(nestingLevel)) != null) {
+                System.out.println("Par id " + par.id + " at line " + par.getLine() + " already declared");
+                stErrors++;
+            }
+        }
+        for (Node dec : n.declist) visit(dec);
         visit(n.exp);
-		// esco dallo scope
-		symTable.remove(nestingLevel--);
+        // esco dallo scope
+        symTable.remove(nestingLevel--);
         return null;
     }
 
-	private STentry stLookup(String id) {
-		var j = nestingLevel;
-		STentry entry = null;
-		while (j >= 0 && entry == null)
-			entry = symTable.get(j--).get(id);
-		return entry;
-	}
+    private STentry stLookup(String id) {
+        var j = nestingLevel;
+        STentry entry = null;
+        while (j >= 0 && entry == null)
+            entry = symTable.get(j--).get(id);
+        return entry;
+    }
 
     @Override
     public Void visitNode(IdNode n) {
         if (print) printNode(n);
-		var entry = stLookup(n.id);
-		if (entry == null) {
-			System.out.println("Var id " + n.id + " at line " + n.getLine() + " not declared");
-			stErrors++;
-		} else {
+        var entry = stLookup(n.id);
+        if (entry == null) {
+            System.out.println("Var or Par id " + n.id + " at line " + n.getLine() + " not declared");
+            stErrors++;
+        } else {
             n.entry = entry;
         }
         return null;
@@ -167,7 +172,7 @@ public class SymbolTableASTVisitor extends BaseASTVisitor<Void> {
         } else {
             n.entry = entry;
         }
-        // for (Node arg : n.arglist) visit(arg);
+        for (Node arg : n.arglist) visit(arg);
         return null;
     }
 }

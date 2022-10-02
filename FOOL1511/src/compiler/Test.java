@@ -9,7 +9,7 @@ import org.antlr.v4.runtime.tree.ParseTree;
 public class Test {
     public static void main(String[] args) throws Exception {
    			
-        String fileName = "prova.fool";
+        String fileName = "esempio.fool";
 
         CharStream chars = CharStreams.fromFileName(fileName);
         FOOLLexer lexer = new FOOLLexer(chars);

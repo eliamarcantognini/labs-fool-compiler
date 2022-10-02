@@ -70,7 +70,6 @@ public class PrintEASTVisitor extends BaseEASTVisitor<Void> {
         return null;
     }
 
-    //
     @Override
     public Void visitNode(ProgLetInNode n) {
         printNode(n);
@@ -103,7 +102,7 @@ public class PrintEASTVisitor extends BaseEASTVisitor<Void> {
     public Void visitNode(FunNode n) {
         printNode(n, n.id);
         visit(n.retType);
-        // for (ParNode par : n.parlist) visit(par);
+        for (ParNode par : n.parlist) visit(par);
         for (Node dec : n.declist) visit(dec);
         visit(n.exp);
         return null;
@@ -112,21 +111,28 @@ public class PrintEASTVisitor extends BaseEASTVisitor<Void> {
     @Override
     public Void visitNode(IdNode n) {
         printNode(n, n.id);
-		if (n.entry != null) visit(n.entry);
+        if (n.entry != null) visit(n.entry);
         return null;
     }
 
     @Override
     public Void visitNode(CallNode n) {
         printNode(n, n.id);
-		if (n.entry != null) visit(n.entry);
-        // for (Node arg : n.arglist) visit(arg);
+        if (n.entry != null) visit(n.entry);
+        for (Node arg : n.arglist) visit(arg);
         return null;
     }
 
     @Override
     public Void visitSTentry(STentry entry) {
         printSTentry("nestLev " + entry.nl);
+        return null;
+    }
+
+    @Override
+    public Void visitNode(ParNode n) {
+        printNode(n, n.id);
+        visit(n.type);
         return null;
     }
 }
