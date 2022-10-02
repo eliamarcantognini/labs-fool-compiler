@@ -1,37 +1,39 @@
 package compiler;
 
-import org.antlr.v4.runtime.*;
-import org.antlr.v4.runtime.tree.*;
-import compiler.lib.*;
+import compiler.lib.Node;
+import org.antlr.v4.runtime.CharStream;
+import org.antlr.v4.runtime.CharStreams;
+import org.antlr.v4.runtime.CommonTokenStream;
+import org.antlr.v4.runtime.tree.ParseTree;
 
 public class Test {
     public static void main(String[] args) throws Exception {
-   			
-    	String fileName = "prova.fool";
 
-    	CharStream chars = CharStreams.fromFileName(fileName);
-    	FOOLLexer lexer = new FOOLLexer(chars);
-    	CommonTokenStream tokens = new CommonTokenStream(lexer);
-    	FOOLParser parser = new FOOLParser(tokens);
+        String fileName = "prova.fool";
 
-    	System.out.println("Generating ST via lexer and parser.");
-    	ParseTree st = parser.prog();
-    	System.out.println("You had "+lexer.lexicalErrors+" lexical errors and "+
-    		parser.getNumberOfSyntaxErrors()+" syntax errors.\n");
+        CharStream chars = CharStreams.fromFileName(fileName);
+        FOOLLexer lexer = new FOOLLexer(chars);
+        CommonTokenStream tokens = new CommonTokenStream(lexer);
+        FOOLParser parser = new FOOLParser(tokens);
 
-    	System.out.println("Generating AST.");
-    	ASTGenerationSTVisitor visitor = new ASTGenerationSTVisitor(); // use true to visualize the ST
-    	Node ast = visitor.visit(st);
-    	System.out.println("");
+        System.out.println("Generating ST via lexer and parser.");
+        ParseTree st = parser.prog();
+        System.out.println("You had " + lexer.lexicalErrors + " lexical errors and " +
+                parser.getNumberOfSyntaxErrors() + " syntax errors.\n");
 
-    	System.out.println("Enriching AST via symbol table.");
-    	SymbolTableASTVisitor symtableVisitor = new SymbolTableASTVisitor();
-    	symtableVisitor.visit(ast);
-    	System.out.println("You had "+symtableVisitor.stErrors+" symbol table errors.\n");
+        System.out.println("Generating AST.");
+        ASTGenerationSTVisitor visitor = new ASTGenerationSTVisitor(); // use true to visualize the ST
+        Node ast = visitor.visit(st);
+        System.out.println("");
 
-    	System.out.println("Visualizing Enriched AST.");
-    	new PrintEASTVisitor().visit(ast);
-    	System.out.println("");
+        System.out.println("Enriching AST via symbol table.");
+        SymbolTableASTVisitor symtableVisitor = new SymbolTableASTVisitor();
+        symtableVisitor.visit(ast);
+        System.out.println("You had " + symtableVisitor.stErrors + " symbol table errors.\n");
+
+        System.out.println("Visualizing Enriched AST.");
+        new PrintEASTVisitor().visit(ast);
+        System.out.println("");
 
 //    	System.out.println("Checking Types.");
 //    	TypeCheckEASTVisitor typeCheckVisitor = new TypeCheckEASTVisitor();
@@ -49,8 +51,8 @@ public class Test {
 
 //    	} catch (TypeException e) {
 //    		System.out.println("Type checking error in main program expression: "+e.text);     		
-    		
-    		
+
+
 //    	} catch (IncomplException e) {    		
 //    		System.out.println("Could not determine main program expression type due to errors detected before type checking.");
 
