@@ -145,6 +145,7 @@ public class PrintEASTVisitor extends BaseEASTVisitor<Void, VoidException> {
         printSTentry("nestlev " + entry.nl);
         printSTentry("type");
         visit(entry.type);
+        printSTentry("offset " + entry.offset);
         return null;
     }
 

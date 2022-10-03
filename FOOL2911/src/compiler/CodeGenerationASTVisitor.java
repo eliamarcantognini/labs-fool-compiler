@@ -5,6 +5,9 @@ import compiler.exc.VoidException;
 import compiler.lib.BaseASTVisitor;
 import compiler.lib.Node;
 
+import static compiler.lib.FOOLlib.freshLabel;
+import static compiler.lib.FOOLlib.nlJoin;
+
 public class CodeGenerationASTVisitor extends BaseASTVisitor<String, VoidException> {
 
     CodeGenerationASTVisitor() {
@@ -17,18 +20,24 @@ public class CodeGenerationASTVisitor extends BaseASTVisitor<String, VoidExcepti
     @Override
     public String visitNode(ProgLetInNode n) {
         if (print) printNode(n);
-        for (Node dec : n.declist) visit(dec);
+        String declCode = "";
+        for (Node dec : n.declist) declCode += nlJoin(declCode, visit(dec));
         visit(n.exp);
-        return null;
-        //return nlJoin();
+        return nlJoin(
+                declCode, // generate code for declarations
+                visit(n.exp),
+                "halt"
+        );
     }
 
     @Override
     public String visitNode(ProgNode n) {
         if (print) printNode(n);
         visit(n.exp);
-        return null;
-        //return nlJoin();
+        return nlJoin(
+                visit(n.exp),
+                "halt"
+        );
     }
 
     @Override
@@ -45,53 +54,61 @@ public class CodeGenerationASTVisitor extends BaseASTVisitor<String, VoidExcepti
     public String visitNode(VarNode n) {
         if (print) printNode(n, n.id);
         visit(n.exp);
-        return null;
-        //return nlJoin();
+        return visit(n.exp);
     }
 
     @Override
     public String visitNode(PrintNode n) {
         if (print) printNode(n);
-        visit(n.exp);
-        return null;
-        //return nlJoin();
+        return nlJoin(
+                visit(n.exp),
+                "print"
+        );
     }
 
     @Override
     public String visitNode(IfNode n) {
         if (print) printNode(n);
-        visit(n.cond);
-        visit(n.th);
-        visit(n.el);
-        return null;
-        //return nlJoin();
+        var l1 = freshLabel();
+        var l2 = freshLabel();
+        return nlJoin(
+                visit(n.cond),
+                "push 1",
+                "beq " + l1,
+                visit(n.el),
+                "b " + l2,
+                l1 + ":",
+                visit(n.th),
+                l2 + ":"
+        );
     }
 
     @Override
     public String visitNode(EqualNode n) {
         if (print) printNode(n);
-        visit(n.left);
-        visit(n.right);
-        return null;
-        //return nlJoin();
+        var l1 = freshLabel();
+        var l2 = freshLabel();
+        return nlJoin(
+                visit(n.left),
+                visit(n.right),
+                "beq " + l1,
+                "push 0",
+                "b " + l2,
+                l1 + ":",
+                "push 1",
+                l2 + ":");
     }
 
     @Override
     public String visitNode(TimesNode n) {
         if (print) printNode(n);
-        visit(n.left);
-        visit(n.right);
-        return null;
-        //return nlJoin();
+        return nlJoin(visit(n.left), visit(n.right), "mult");
     }
 
     @Override
     public String visitNode(PlusNode n) {
         if (print) printNode(n);
-        visit(n.left);
-        visit(n.right);
-        return null;
-        //return nlJoin();
+        return nlJoin(visit(n.left), visit(n.right), "add");
     }
 
     @Override
@@ -105,34 +122,28 @@ public class CodeGenerationASTVisitor extends BaseASTVisitor<String, VoidExcepti
     @Override
     public String visitNode(IdNode n) {
         if (print) printNode(n, n.id);
-        return null;
-        //return nlJoin();
+        return nlJoin(
+                "lfp",  // load address of current frame (containing "id" declaration)
+                "push " + n.entry.offset, "add",  // compute address of "id" declaration
+                "lw"    // load value of "id" variable
+        );
     }
 
+    // Arrivato a 2h35 di 2911
     @Override
     public String visitNode(BoolNode n) {
         if (print) printNode(n, n.val.toString());
-        return null;
+        return "push " + (n.val ? 1 : 0);
     }
 
     @Override
     public String visitNode(IntNode n) {
         if (print) printNode(n, n.val.toString());
-        return null;
+        return "push " + n.val;
     }
 }
 
-// 	String l1 = freshLabel();
 
-
-//	String declCode = null;
-
-// generate code for declarations (allocation)
-
-
-// load address of current frame (containing "id" declaration)
-// compute address of "id" declaration
-// load value of "id" variable
 
 
 //	String getAR = null;

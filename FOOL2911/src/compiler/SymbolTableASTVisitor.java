@@ -16,6 +16,7 @@ public class SymbolTableASTVisitor extends BaseASTVisitor<Void, VoidException> {
     private List<Map<String, STentry>> symTable = new ArrayList<>();
     private int nestingLevel = 0; // current nesting level
     int stErrors = 0;
+    private int decOffset = -1; // counter for offset of local declarations at current nesting level
 
     SymbolTableASTVisitor() {
     }
@@ -82,7 +83,7 @@ public class SymbolTableASTVisitor extends BaseASTVisitor<Void, VoidException> {
         if (print) printNode(n);
         visit(n.exp);
         Map<String, STentry> hm = symTable.get(nestingLevel);
-        STentry entry = new STentry(nestingLevel, n.type);
+        STentry entry = new STentry(nestingLevel, n.type, decOffset--);
         //inserimento di ID nella symtable
         if (hm.put(n.id, entry) != null) {
             System.out.println("Var id " + n.id + " at line " + n.getLine() + " already declared");
@@ -167,10 +168,8 @@ public class SymbolTableASTVisitor extends BaseASTVisitor<Void, VoidException> {
     }
 }
 
-//	private int decOffset=-1; // counter for offset of local declarations at current nesting level 
 
-
-//	int prevNLDecOffset=decOffset; // stores counter for offset of declarations at previous nesting level 
+//	int prevNLDecOffset=decOffset; // stores counter for offset of declarations at previous nesting level
 
 //	decOffset=prevNLDecOffset; // restores counter for offset of declarations at previous nesting level 
 

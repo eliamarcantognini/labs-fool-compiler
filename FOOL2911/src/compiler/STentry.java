@@ -8,10 +8,17 @@ import compiler.lib.Visitable;
 public class STentry implements Visitable {
     int nl;
     TypeNode type;
+    int offset;
 
     public STentry(int n, TypeNode t) {
         nl = n;
         type = t;
+    }
+
+    public STentry(int n, TypeNode t, int o) {
+        nl = n;
+        type = t;
+        offset = o;
     }
 
     @Override

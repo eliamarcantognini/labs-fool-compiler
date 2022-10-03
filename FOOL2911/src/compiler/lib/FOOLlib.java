@@ -33,11 +33,11 @@ public class FOOLlib {
         return code;
     }
 
-//	private static int labCount = 0;
-//
-//	public static String freshLabel() {
-//		return "label" + (labCount++);
-//	}
+    private static int labCount = 0;
+
+    public static String freshLabel() {
+        return "label" + (labCount++);
+    }
 //
 //	private static int funlabCount = 0;
 //
