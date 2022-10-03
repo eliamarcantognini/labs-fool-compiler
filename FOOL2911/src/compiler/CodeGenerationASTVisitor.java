@@ -1,121 +1,125 @@
 package compiler;
 
 import compiler.AST.*;
-import compiler.lib.*;
-import compiler.exc.*;
-import static compiler.lib.FOOLlib.*;
+import compiler.exc.VoidException;
+import compiler.lib.BaseASTVisitor;
+import compiler.lib.Node;
 
 public class CodeGenerationASTVisitor extends BaseASTVisitor<String, VoidException> {
 
-  CodeGenerationASTVisitor() {}
-  CodeGenerationASTVisitor(boolean debug) {super(false,debug);} //enables print for debugging
+    CodeGenerationASTVisitor() {
+    }
 
-	@Override
-	public String visitNode(ProgLetInNode n) {
-		if (print) printNode(n);
-		for (Node dec : n.declist) visit(dec);
-		visit(n.exp);
-		return null;
-		//return nlJoin();
-	}
+    CodeGenerationASTVisitor(boolean debug) {
+        super(false, debug);
+    } //enables print for debugging
 
-	@Override
-	public String visitNode(ProgNode n) {
-		if (print) printNode(n);
-		visit(n.exp);
-		return null;
-		//return nlJoin();
-	}
+    @Override
+    public String visitNode(ProgLetInNode n) {
+        if (print) printNode(n);
+        for (Node dec : n.declist) visit(dec);
+        visit(n.exp);
+        return null;
+        //return nlJoin();
+    }
 
-	@Override
-	public String visitNode(FunNode n) {
-		if (print) printNode(n,n.id);
-		for (ParNode par : n.parlist) visit(par);
-		for (Node dec : n.declist) visit(dec);
-		visit(n.exp);
-		return null;
-		//return nlJoin();
-	}
+    @Override
+    public String visitNode(ProgNode n) {
+        if (print) printNode(n);
+        visit(n.exp);
+        return null;
+        //return nlJoin();
+    }
 
-	@Override
-	public String visitNode(VarNode n) {
-		if (print) printNode(n,n.id);
-		visit(n.exp);
-		return null;
-		//return nlJoin();
-	}
+    @Override
+    public String visitNode(FunNode n) {
+        if (print) printNode(n, n.id);
+        for (ParNode par : n.parlist) visit(par);
+        for (Node dec : n.declist) visit(dec);
+        visit(n.exp);
+        return null;
+        //return nlJoin();
+    }
 
-	@Override
-	public String visitNode(PrintNode n) {
-		if (print) printNode(n);
-		visit(n.exp);
-		return null;
-		//return nlJoin();
-	}
+    @Override
+    public String visitNode(VarNode n) {
+        if (print) printNode(n, n.id);
+        visit(n.exp);
+        return null;
+        //return nlJoin();
+    }
 
-	@Override
-	public String visitNode(IfNode n) {
-		if (print) printNode(n);
-		visit(n.cond);
-		visit(n.th);
-		visit(n.el);
-		return null;
-		//return nlJoin();
-	}
+    @Override
+    public String visitNode(PrintNode n) {
+        if (print) printNode(n);
+        visit(n.exp);
+        return null;
+        //return nlJoin();
+    }
 
-	@Override
-	public String visitNode(EqualNode n) {
-		if (print) printNode(n);
-		visit(n.left);
-		visit(n.right);
-		return null;
-		//return nlJoin();
-	}
+    @Override
+    public String visitNode(IfNode n) {
+        if (print) printNode(n);
+        visit(n.cond);
+        visit(n.th);
+        visit(n.el);
+        return null;
+        //return nlJoin();
+    }
 
-	@Override
-	public String visitNode(TimesNode n) {
-		if (print) printNode(n);
-		visit(n.left);
-		visit(n.right);
-		return null;
-		//return nlJoin();
-	}
+    @Override
+    public String visitNode(EqualNode n) {
+        if (print) printNode(n);
+        visit(n.left);
+        visit(n.right);
+        return null;
+        //return nlJoin();
+    }
 
-	@Override
-	public String visitNode(PlusNode n) {
-		if (print) printNode(n);
-		visit(n.left);
-		visit(n.right);
-		return null;
-		//return nlJoin();
-	}
+    @Override
+    public String visitNode(TimesNode n) {
+        if (print) printNode(n);
+        visit(n.left);
+        visit(n.right);
+        return null;
+        //return nlJoin();
+    }
 
-	@Override
-	public String visitNode(CallNode n) {
-		if (print) printNode(n,n.id);
-		for (Node arg : n.arglist) visit(arg);
-		return null;
-		//return nlJoin();
-	}
+    @Override
+    public String visitNode(PlusNode n) {
+        if (print) printNode(n);
+        visit(n.left);
+        visit(n.right);
+        return null;
+        //return nlJoin();
+    }
 
-	@Override
-	public String visitNode(IdNode n) {
-		if (print) printNode(n,n.id);
-		return null;
-		//return nlJoin();
-	}
+    @Override
+    public String visitNode(CallNode n) {
+        if (print) printNode(n, n.id);
+        for (Node arg : n.arglist) visit(arg);
+        return null;
+        //return nlJoin();
+    }
 
-	@Override
-	public String visitNode(BoolNode n) {
-		if (print) printNode(n,n.val.toString());
-		return null;
-	}
+    @Override
+    public String visitNode(IdNode n) {
+        if (print) printNode(n, n.id);
+        return null;
+        //return nlJoin();
+    }
 
-	@Override
-	public String visitNode(IntNode n) {
-		if (print) printNode(n,n.val.toString());
-		return null;
-	}
+    @Override
+    public String visitNode(BoolNode n) {
+        if (print) printNode(n, n.val.toString());
+        return null;
+    }
+
+    @Override
+    public String visitNode(IntNode n) {
+        if (print) printNode(n, n.val.toString());
+        return null;
+    }
 }
 
 // 	String l1 = freshLabel();
@@ -129,7 +133,6 @@ public class CodeGenerationASTVisitor extends BaseASTVisitor<String, VoidExcepti
 // load address of current frame (containing "id" declaration)
 // compute address of "id" declaration
 // load value of "id" variable
-
 
 
 //	String getAR = null;
