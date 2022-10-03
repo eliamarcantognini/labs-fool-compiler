@@ -8,7 +8,7 @@ import compiler.lib.Node;
 public class PrintEASTVisitor extends BaseEASTVisitor<Void, VoidException> {
 
     PrintEASTVisitor() {
-        super(true);
+        super(false, true);
     }
 
     @Override
@@ -94,7 +94,7 @@ public class PrintEASTVisitor extends BaseEASTVisitor<Void, VoidException> {
     @Override
     public Void visitNode(CallNode n) {
         printNode(n, n.id);
-        if (n.entry != null) visit(n.entry);
+        visit(n.entry);
         for (Node arg : n.arglist) visit(arg);
         return null;
     }
@@ -102,7 +102,7 @@ public class PrintEASTVisitor extends BaseEASTVisitor<Void, VoidException> {
     @Override
     public Void visitNode(IdNode n) {
         printNode(n, n.id);
-        if (n.entry != null) visit(n.entry);
+        visit(n.entry);
         return null;
     }
 
@@ -118,13 +118,13 @@ public class PrintEASTVisitor extends BaseEASTVisitor<Void, VoidException> {
         return null;
     }
 
-//	@Override
-//	public Void visitNode(ArrowTypeNode n) {
-//		printNode(n);
-//		for (Node par: n.parlist) visit(par);
-//		visit(n.ret,"->"); //marks return type
-//		return null;
-//	}
+    @Override
+    public Void visitNode(ArrowTypeNode n) {
+        printNode(n);
+        for (Node par : n.parlist) visit(par);
+        visit(n.ret, "->"); //marks return type
+        return null;
+    }
 
     @Override
     public Void visitNode(BoolTypeNode n) {
@@ -141,8 +141,8 @@ public class PrintEASTVisitor extends BaseEASTVisitor<Void, VoidException> {
     @Override
     public Void visitSTentry(STentry entry) {
         printSTentry("nestlev " + entry.nl);
-        // printSTentry("type");
-        // visit(entry.type);
+        printSTentry("type");
+        visit(entry.type);
         return null;
     }
 
