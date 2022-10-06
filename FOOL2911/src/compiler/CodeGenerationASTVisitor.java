@@ -22,7 +22,7 @@ public class CodeGenerationASTVisitor extends BaseASTVisitor<String, VoidExcepti
         String declCode = "";
         for (Node dec : n.declist) declCode += nlJoin(declCode, visit(dec));
         return nlJoin("push 0",
-                declCode, // generate code for declarations
+                declCode, // generate code for declarations (allocation)
                 visit(n.exp),
                 "halt",
                 getCode());
@@ -46,7 +46,8 @@ public class CodeGenerationASTVisitor extends BaseASTVisitor<String, VoidExcepti
         }
         for (int i = 0; i < n.parlist.size(); i++) popParl = nlJoin(popParl, "pop");
         String funl = freshFunLabel();
-        putCode(nlJoin(funl + ":", "cfp", // set $fp to $sp value
+        putCode(nlJoin(funl + ":",
+                "cfp", // set $fp to $sp value
                 "lra", // load $ra value
                 declCode, // generate code for local declarations
                 visit(n.exp), // generate code for function body expression
