@@ -21,45 +21,44 @@ public class CodeGenerationASTVisitor extends BaseASTVisitor<String, VoidExcepti
         if (print) printNode(n);
         String declCode = "";
         for (Node dec : n.declist) declCode += nlJoin(declCode, visit(dec));
-        visit(n.exp);
-        return nlJoin("push 0", declCode, // generate code for declarations
-                visit(n.exp), "halt", getCode());
+        return nlJoin("push 0",
+                declCode, // generate code for declarations
+                visit(n.exp),
+                "halt",
+                getCode());
     }
 
     @Override
     public String visitNode(ProgNode n) {
         if (print) printNode(n);
-        visit(n.exp);
         return nlJoin(visit(n.exp), "halt");
     }
 
     @Override
     public String visitNode(FunNode n) {
         if (print) printNode(n, n.id);
-        for (ParNode par : n.parlist) visit(par);
-        for (Node dec : n.declist) visit(dec);
-        String declCode = "";
-        for (Node dec : n.declist) declCode += nlJoin(declCode, visit(dec));
-        visit(n.exp);
+        String declCode = null;
+        String popDecl = null;
+        String popParl = null;
+        for (Node dec : n.declist) {
+            declCode += nlJoin(declCode, visit(dec));
+            popDecl += nlJoin(popDecl, "pop");
+        }
+        for (int i = 0; i < n.parlist.size(); i++) popParl = nlJoin(popParl, "pop");
         String funl = freshFunLabel();
-        putCode(
-            nlJoin(
-                funl + ":"
-                // set $fp to $sp value
-                // load $ra value
-                // generate code for local declarations
-
-//                declCode,// generate code for function body expression
-
-                // set $tm to popped value (function result)
-                // remove local declarations from stack
-                // set $ra to popped value
-                // remove Access Link from stack
-                // remove parameters from stack
-                // set $fp to popped value (Control Link)
-                // load $tm value
-                // load $ra value
-                // jump to popped address
+        putCode(nlJoin(funl + ":", "cfp", // set $fp to $sp value
+                "lra", // load $ra value
+                declCode, // generate code for local declarations
+                visit(n.exp), // generate code for function body expression
+                "stm", // set $tm to popped value (function result)
+                popDecl, // remove local declarations from stack
+                "sra", // set $ra to popped value
+                "pop", // remove Access Link from stack
+                popParl, // remove parameters from stack
+                "sfp", // set $fp to popped value (Control Link)
+                "ltm", // load $tm value (function result)
+                "lra", // load $ra value
+                "js" // jump to popped address
         ));
         return nlJoin("push " + funl);
     }
@@ -67,7 +66,6 @@ public class CodeGenerationASTVisitor extends BaseASTVisitor<String, VoidExcepti
     @Override
     public String visitNode(VarNode n) {
         if (print) printNode(n, n.id);
-        visit(n.exp);
         return visit(n.exp);
     }
 
