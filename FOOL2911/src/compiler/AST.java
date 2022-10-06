@@ -170,7 +170,7 @@ public class AST {
         List<Node> arglist = new ArrayList<Node>();
         STentry entry;
 
-        //int nl;
+        int nl;
         CallNode(String i, List<Node> p) {
             id = i;
             arglist = p;
@@ -186,7 +186,7 @@ public class AST {
         String id;
         STentry entry;
 
-        //int nl;
+        int nl;
         IdNode(String i) {
             id = i;
         }

@@ -38,20 +38,20 @@ public class FOOLlib {
     public static String freshLabel() {
         return "label" + (labCount++);
     }
-//
-//	private static int funlabCount = 0;
-//
-//	public static String freshFunLabel() {
-//		return "function" + (funlabCount++);
-//	}
-//
-//	private static String funCode = null;
-//
-//	public static void putCode(String c) {
-//		funCode = nlJoin(funCode, "", c); //linea vuota di separazione prima di codice funzione
-//	}
-//
-//	public static String getCode() {
-//		return funCode;
-//	}
+
+    private static int funlabCount = 0;
+
+    public static String freshFunLabel() {
+        return "function" + (funlabCount++);
+    }
+
+    private static String funCode = null;
+
+    public static void putCode(String c) {
+        funCode = nlJoin(funCode, "", c); //linea vuota di separazione prima di codice funzione
+    }
+
+    public static String getCode() {
+        return funCode;
+    }
 }
